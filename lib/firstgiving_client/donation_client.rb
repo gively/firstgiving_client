@@ -2,7 +2,7 @@ require "httparty"
 require "firstgiving_client/donation"
 
 module FirstGivingClient
-  class Client
+  class DonationClient
     include HTTParty
     format :xml
     
@@ -15,37 +15,37 @@ module FirstGivingClient
     end
     
     def donate!(donation)
-      result = self.class.post(fg_url("/donation/creditcard"), 
+      result = self.class.post(donation_url("/donation/creditcard"), 
         :headers => auth_headers,
         :body => donation.to_params)
-      fg_response(result)[:transactionId]
+      donation_response(result)["transactionId"]
     end
     
     def donate_recurring!(donation)
-      result = self.class.post(fg_url("/donation/recurringcreditcardprofile"), 
+      result = self.class.post(donation_url("/donation/recurringcreditcardprofile"), 
         :headers => auth_headers,
         :body => donation.to_params)
-      fg_response(result)[:recurringDonationProfileId]
+      donation_response(result)["recurringDonationProfileId"]
     end
     
     def valid_message?(message, signature)
-      result = self.class.get(fg_url("/verify"),
+      result = self.class.get(donation_url("/verify"),
         :headers => auth_headers,
         :query => { :message => message, :signature => signature })
-      fg_response(result)[:valid] == "1"
+      donation_response(result)["valid"] == "1"
     end
     
     protected
     
-    def fg_response(result)
-      result.parsed_response[:firstGivingDonationApi][:firstGivingResponse]
+    def donation_response(result)
+      result.parsed_response["firstGivingDonationApi"]["firstGivingResponse"]
     end
     
     def auth_headers
       { "JG_APPLICATIONKEY" => application_key, "JG_SECURITYTOKEN" => security_token }
     end
       
-    def fg_url(path)
+    def donation_url(path)
       if use_sandbox
         "https://api.firstgiving.com#{path}"
       else
