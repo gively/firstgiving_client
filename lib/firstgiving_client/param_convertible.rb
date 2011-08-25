@@ -1,4 +1,4 @@
-module FirstGivingDonations
+module FirstGivingClient
   module ParamConvertible
     def self.included(base)
       base.class_exec do       

@@ -1,6 +1,6 @@
-require "firstgiving_donations/param_convertible"
+require "firstgiving_client/param_convertible"
 
-module FirstGivingDonations
+module FirstGivingClient
   class CreditCard
     include ParamConvertible
 

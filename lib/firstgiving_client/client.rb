@@ -1,7 +1,7 @@
 require "httparty"
-require "firstgiving_donations/donation"
+require "firstgiving_client/donation"
 
-module FirstGivingDonations
+module FirstGivingClient
   class Client
     include HTTParty
     format :xml

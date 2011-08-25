@@ -1,8 +1,8 @@
-require "firstgiving_donations/param_convertible"
-require "firstgiving_donations/credit_card"
-require "firstgiving_donations/billing_contact"
+require "firstgiving_client/param_convertible"
+require "firstgiving_client/credit_card"
+require "firstgiving_client/billing_contact"
 
-module FirstGivingDonations
+module FirstGivingClient
   class Donation
     include ParamConvertible
 
