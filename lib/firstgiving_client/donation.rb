@@ -1,6 +1,7 @@
 require "firstgiving_client/param_convertible"
 require "firstgiving_client/credit_card"
 require "firstgiving_client/billing_contact"
+require "money"
 
 module FirstGivingClient
   class Donation
@@ -29,6 +30,10 @@ module FirstGivingClient
       params.update billing_contact.to_params
       
       params
+    end
+    
+    def amount=(amount)
+      @amount = amount.to_money
     end
   end
   
