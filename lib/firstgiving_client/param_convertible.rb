@@ -29,6 +29,17 @@ module FirstGivingClient
     end
     
     module InstanceMethods
+      def attributes=(attributes)
+        required = self.class.required_params || {}
+        optional = self.class.optional_params || {}
+        
+        (required.keys + optional.keys).each do |key|
+          if attributes.has_key?(key)
+            self.send("#{key}=", attributes[key])
+          end
+        end
+      end
+    
       def to_params
         params = {}
         
