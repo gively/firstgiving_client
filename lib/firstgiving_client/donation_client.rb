@@ -5,6 +5,10 @@ module FirstGivingClient
   class DonationClient
     class RemoteException < Exception
       attr_accessor :friendly_message, :error_target, :acknowledgement
+      
+      def inspect
+        "#<RemoteException from FirstGiving: #{message} (friendly_message: #{friendly_message}, target: #{error_target}, ack: #{acknowledgement}>"
+      end
     end
         
     class Response
